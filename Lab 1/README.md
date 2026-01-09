@@ -1,4 +1,4 @@
-# So sánh Pillow (PIL) và OpenCV trong Python
+# So sánh giữa Pillow (PIL) và OpenCV trong trong xử lý ảnh
 
 ## Pillow (PIL)
 

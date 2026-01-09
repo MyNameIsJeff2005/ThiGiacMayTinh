@@ -1,27 +1,35 @@
-# So sánh giữa Pillow (PIL) và OpenCV trong trong xử lý ảnh
+# SO SÁNH SỰ KHÁC BIỆT GIỮA PIL VÀ OPENCV
 
-## Pillow (PIL)
+## 1. Cách đọc ảnh và kiểu dữ liệu
 
-Pillow là thư viện Python dùng cho **xử lý ảnh cơ bản**. Thư viện này phù hợp với các tác vụ đơn giản như đọc và ghi file ảnh, thay đổi kích thước, cắt ảnh, xoay ảnh, chỉnh màu và vẽ văn bản lên ảnh.
+### PIL
+- Sử dụng hàm `Image.open()`.
+- Kết quả trả về là một object của lớp `PIL.Image`.
 
-Pillow có cú pháp dễ hiểu, dễ sử dụng và thường được dùng trong các ứng dụng web hoặc các chương trình xử lý ảnh không yêu cầu thuật toán phức tạp.
-
-### Ứng dụng tiêu biểu
-- Resize và crop ảnh  
-- Thêm watermark, văn bản  
-- Chuyển đổi định dạng ảnh  
-- Xử lý ảnh trong backend web  
+### OpenCV
+- Sử dụng hàm `cv2.imread()`.
+- Kết quả trả về là một `numpy array` chứa các giá trị số nguyên 8-bit (uint8).
 
 ---
 
-## OpenCV
+## 2. Không gian màu
 
-OpenCV là thư viện mã nguồn mở chuyên dùng cho **Computer Vision và xử lý ảnh nâng cao**. Thư viện này hỗ trợ nhiều thuật toán phức tạp như phát hiện khuôn mặt, nhận diện vật thể, xử lý video và làm việc với camera thời gian thực.
+- **PIL**:  
+  Ảnh được đọc theo thứ tự kênh màu **RGB (Red – Green – Blue)**.
 
-OpenCV có hiệu năng cao và thường được sử dụng trong các bài toán liên quan đến trí tuệ nhân tạo và thị giác máy tính.
+- **OpenCV**:  
+  Ảnh được đọc theo thứ tự kênh màu **BGR (Blue – Green – Red)**.
 
-### Ứng dụng tiêu biểu
-- Nhận diện khuôn mặt và vật thể  
-- Xử lý ảnh nâng cao (edge detection, thresholding)  
-- Xử lý video và webcam  
-- Ứng dụng AI và Machine Learning  
+---
+
+## 3. Cách hiển thị ảnh
+
+### PIL
+- Chỉ cần gọi tên biến chứa ảnh, ảnh sẽ tự động hiển thị trong Jupyter Notebook.
+
+### OpenCV
+- Hàm `cv2.imshow()` thường gây lỗi hoặc làm treo Jupyter Notebook, do đó không được sử dụng trực tiếp.
+- Thay vào đó, ảnh được hiển thị bằng thư viện `matplotlib.pyplot` với hàm `plt.imshow(image)`.
+- Do sự khác biệt giữa không gian màu RGB và BGR, cần chuyển đổi ảnh trước khi hiển thị bằng:
+  ```python
+  cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
